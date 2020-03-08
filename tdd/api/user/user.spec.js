@@ -5,8 +5,12 @@ const should = require('should')
 const models = require('../../models')
 
 describe('GET /USERS는 ', ()=>{
-    describe.only('성공시', () => {
-        // before(() => models.sequelize.sync({force: true}));
+    const users = [
+        {name : 'alice'},{name : 'bek'},{name : 'chris'}
+    ]
+    before(() => models.sequelize.sync({force: true}));
+    before(() => models.User.bulkCreate(users));
+    describe('성공시', () => {
         it('유저 객체를 담은 배열로 응답한다', (done) => {
             request(app)
                 .get('/users')
@@ -36,6 +40,11 @@ describe('GET /USERS는 ', ()=>{
 })
 
 describe('GET uesrs/1는 ', ()=> {
+    const users = [
+        {name : 'alice'},{name : 'bek'},{name : 'chris'}
+    ]
+    before(() => models.sequelize.sync({force: true}));
+    before(() => models.User.bulkCreate(users));
     describe('성공시', ()=> {
         it('id가 1인 유저 객체를 반환한다', (done)=> {
             request(app)
@@ -63,6 +72,11 @@ describe('GET uesrs/1는 ', ()=> {
 })
 
 describe('DEL uesrs/1는 ', () => {
+    const users = [
+        {name : 'alice'},{name : 'bek'},{name : 'chris'}
+    ]
+    before(() => models.sequelize.sync({force: true}));
+    before(() => models.User.bulkCreate(users));
     describe('성공시', () => {
         it('204를 응답한다', (done) => {
             request(app)
@@ -82,6 +96,11 @@ describe('DEL uesrs/1는 ', () => {
 })
 
 describe('POST /users는 ', () => {
+    const users = [
+        {name : 'alice'},{name : 'bek'},{name : 'chris'}
+    ]
+    before(() => models.sequelize.sync({force: true}));
+    before(() => models.User.bulkCreate(users));
     describe('성공시' , () => {
         let name = 'daniel',
             body;
@@ -122,6 +141,11 @@ describe('POST /users는 ', () => {
 })
 
 describe('PUT /users는',() => {
+    const users = [
+        {name : 'alice'},{name : 'bek'},{name : 'chris'}
+    ]
+    before(() => models.sequelize.sync({force: true}));
+    before(() => models.User.bulkCreate(users));
     describe('성공시', ()=> {
         it('변경된 이름을 응답한다', (done)=> {
             const name = "den";
