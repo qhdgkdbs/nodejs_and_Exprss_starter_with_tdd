@@ -1,5 +1,10 @@
 const app = require('../../index')
+const syncDB = require('./sync-db')
 
-app.listen(3000, ()=> {
-    console.log("hello start")
+syncDB().then(_=>{
+    console.log('Sync Database')
+    app.listen(3000, ()=> {
+        console.log("hello start")
+    })
 })
+
